@@ -1,6 +1,9 @@
 package net.jalepenonoodle.tutorialmod;
 
 import com.mojang.logging.LogUtils;
+
+import net.jalepenonoodle.tutorialmod.Item.ModCreativeModTabs;
+import net.jalepenonoodle.tutorialmod.Item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.food.FoodProperties;
@@ -31,13 +34,20 @@ import org.slf4j.Logger;
 @Mod(TutorialMod.MODID)
 public class TutorialMod
 {
-
+ 
     public static final String MODID = "tutorialmod";
 
     private static final Logger LOGGER = LogUtils.getLogger();
     public TutorialMod(FMLJavaModLoadingContext context)
     {
         IEventBus modEventBus = context.getModEventBus();
+
+        ModCreativeModTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+
+
+
 
         modEventBus.addListener(this::commonSetup);
 
@@ -53,8 +63,11 @@ public class TutorialMod
 
     }
 
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.SAPPHIRE);
+            event.accept(ModItems.RAW_SAPPHIRE);
+        }
     }
 
     @SubscribeEvent
