@@ -1,9 +1,5 @@
 package net.jalepenonoodle.tutorialmod.Item;
 
-import java.rmi.registry.Registry;
-
-import org.antlr.v4.parse.ANTLRParser.finallyClause_return;
-
 import net.jalepenonoodle.tutorialmod.TutorialMod;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
